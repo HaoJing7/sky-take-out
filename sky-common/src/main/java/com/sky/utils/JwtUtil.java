@@ -40,7 +40,7 @@ public class JwtUtil {
 
     /**
      * Token解密
-     *
+     * 如果解密的过程中没有报错的话则表示检验通过，不需要把token存储起来
      * @param secretKey jwt秘钥 此秘钥一定要保留好在服务端, 不能暴露出去, 否则sign就可以被伪造, 如果对接多个客户端建议改造成多个
      * @param token     加密后的token
      * @return
