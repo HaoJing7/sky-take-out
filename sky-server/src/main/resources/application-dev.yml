@@ -6,10 +6,12 @@ sky:
     database: sky_take_out
     username: root
     password: tanhao
-  # 阿里云的配置属性
-#  alioss:
-#    endpoint: https://oss-cn-guangzhou.aliyuncs.com
-#    bucket-name: tanhao-bucket
+# 阿里云的配置属性
+  alioss:
+    endpoint: oss-cn-guangzhou.aliyuncs.com
+    bucket-name: tanhao-bucket
+    access-key-id: LTAI5tDbc3CVnmWPnobddDnc
+    access-key-secret: qGaSw8NEq33VZdVqmlzXM01RWVzjd7
 
 
 
