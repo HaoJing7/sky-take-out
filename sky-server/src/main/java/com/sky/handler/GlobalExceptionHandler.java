@@ -17,7 +17,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 public class GlobalExceptionHandler {
 
     /**
-     * 捕获业务异常（BaseException是其它异常的父类）
+     * 捕获业务异常（BaseException是上面自定义异常的父类）
      * @param ex
      * @return
      */
