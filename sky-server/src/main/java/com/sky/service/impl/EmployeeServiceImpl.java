@@ -86,14 +86,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         // 密码不能明文存储，要用MD5加密
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
 
-        // 设置当前记录的创建时间和修改时间
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
-
-        // 设置当前记录创建人id和修改人id
-        // 后期需要改为当前登陆用户的id（展示用默认值）
-        employee.setCreateUser(BaseContext.getCurrentId());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+//        // 设置当前记录的创建时间和修改时间
+//        employee.setCreateTime(LocalDateTime.now());
+//        employee.setUpdateTime(LocalDateTime.now());
+//
+//        // 设置当前记录创建人id和修改人id
+//        // 后期需要改为当前登陆用户的id（展示用默认值）
+//        employee.setCreateUser(BaseContext.getCurrentId());
+//        employee.setUpdateUser(BaseContext.getCurrentId());
 
         // 使用持久层保存数据
         employeeMapper.insert(employee);
@@ -154,9 +154,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         // 对象属性拷贝
         BeanUtils.copyProperties(employeeDTO, employee);
 
-        // 设置修改时间和修改的用户
-        employee.setUpdateTime(LocalDateTime.now());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+//        // 设置修改时间和修改的用户
+//        employee.setUpdateTime(LocalDateTime.now());
+//        employee.setUpdateUser(BaseContext.getCurrentId());
 
         // 使用了动态sql，会动态拼接
         employeeMapper.update(employee);
