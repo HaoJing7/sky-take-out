@@ -25,8 +25,10 @@ import java.util.List;
 public class DishController {
     @Autowired
     private DishService dishService;
+
     /**
      * 新增菜品
+     *
      * @param dishDTO
      * @return
      */
@@ -70,6 +72,7 @@ public class DishController {
 
     /**
      * 修改菜品
+     *
      * @param dishDTO
      * @return
      */
@@ -80,4 +83,22 @@ public class DishController {
         return Result.success();
     }
 
+    /**
+     * 菜品起售停售
+     */
+    @PostMapping("/status/{status}")
+    public Result<?> startOrStop(@PathVariable Integer status, Long id) {
+        log.info("修改菜品{}的状态为{}", id, status);
+        dishService.startOrStop(status, id);
+        return Result.success();
+    }
+
+    /**
+     * 根据分类id查询菜品
+     */
+    @GetMapping("/list")
+    public Result<?> list(Long categoryId) {
+        List<Dish> dishList = dishService.list(categoryId);
+        return Result.success(dishList);
+    }
 }

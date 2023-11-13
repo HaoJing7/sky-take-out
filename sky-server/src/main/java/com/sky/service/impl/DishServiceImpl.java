@@ -8,10 +8,12 @@ import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
 import com.sky.entity.Dish;
 import com.sky.entity.DishFlavor;
+import com.sky.entity.Setmeal;
 import com.sky.exception.DeletionNotAllowedException;
 import com.sky.mapper.DishFlavorMapper;
 import com.sky.mapper.DishMapper;
 import com.sky.mapper.SetmealDishMapper;
+import com.sky.mapper.SetmealMapper;
 import com.sky.result.PageResult;
 import com.sky.service.DishService;
 import com.sky.vo.DishVO;
@@ -21,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,6 +36,8 @@ public class DishServiceImpl implements DishService {
     private DishFlavorMapper dishFlavorMapper;
     @Autowired
     private SetmealDishMapper setmealDishMapper;
+    @Autowired
+    private SetmealMapper setmealMapper;
 
     /**
      * 新增菜品和对应的口味
@@ -141,5 +146,44 @@ public class DishServiceImpl implements DishService {
             flavors.forEach(dishFlavor -> dishFlavor.setDishId(dishDTO.getId()));
             dishFlavorMapper.insertBatch(flavors);
         }
+    }
+
+    @Override
+    public void startOrStop(Integer status, Long id) {
+        // 修改菜品的状态，直接复用update接口
+        Dish dish = Dish.builder().id(id).status(status).build();
+        dishMapper.update(dish);
+
+        if (status == StatusConstant.DISABLE) {
+            // 当菜品的状态为0的时候，相应的套餐
+            List<Long> dishIds = new ArrayList<>();
+            dishIds.add(id);
+            // 查询包含该菜品id的所有套餐
+            List<Long> setmealIds = setmealDishMapper.getSetmealIdsByDishIds(dishIds);
+            // 还要修改每个套餐的修改时间属性，因此需要循环每个菜品进行修改
+            if (setmealIds != null && setmealIds.size() > 0) {
+                for (Long setmealId : setmealIds) {
+                    Setmeal setmeal = Setmeal.builder().
+                            id(setmealId).
+                            status(StatusConstant.DISABLE)
+                            .build();
+                    setmealMapper.update(setmeal);
+                }
+            }
+        }
+
+    }
+
+    /**
+     * 根据分类id查询菜品 同时状态是
+     */
+    @Override
+    public List<Dish> list(Long categoryId) {
+        Dish dish = Dish.builder()
+                .status(StatusConstant.ENABLE)
+                .categoryId(categoryId)
+                .build();
+        // 复用dishMapper的list方法
+        return dishMapper.list(dish);
     }
 }
