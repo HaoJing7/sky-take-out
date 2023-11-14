@@ -28,9 +28,13 @@ public class RedisConfiguration {
         // key和 hashKey采用 string序列化
         redisTemplate.setKeySerializer(RedisSerializer.string());
         redisTemplate.setHashKeySerializer(RedisSerializer.string());
-        // value和 hashValue采用 JSON序列化
+/*        // value和 hashValue采用 JSON序列化
         redisTemplate.setValueSerializer(jsonRedisSerializer);
-        redisTemplate.setHashValueSerializer(jsonRedisSerializer);
+        redisTemplate.setHashValueSerializer(jsonRedisSerializer);*/
+
+/*        redisTemplate.setValueSerializer(RedisSerializer.string());
+        redisTemplate.setHashValueSerializer(RedisSerializer.string());*/
+
         return redisTemplate;
     }
 }
