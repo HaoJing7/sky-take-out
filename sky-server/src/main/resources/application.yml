@@ -6,12 +6,14 @@ spring:
     active: dev #开发环境
   main:
     allow-circular-references: true
+  # 数据库的配置属性
   datasource:
     druid:
       driver-class-name: ${sky.datasource.driver-class-name}
       url: jdbc:mysql://${sky.datasource.host}:${sky.datasource.port}/${sky.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
       username: ${sky.datasource.username}
       password: ${sky.datasource.password}
+  # redis的配置属性
   redis:
     host: ${sky.redis.host}
     port: ${sky.redis.port}
@@ -42,8 +44,17 @@ sky:
     admin-ttl: 7200000000
     # 设置前端传递过来的令牌名称
     admin-token-name: token
+    # 设置小程序端的jwt
+    user-secret-key: itheima
+    user-ttl: 7200000000
+    user-token-name: authentication
+  # 阿里云的配置属性
   alioss:
     endpoint: ${sky.alioss.endpoint}
     bucket-name: ${sky.alioss.bucket-name}
     access-key-id: ${sky.alioss.access-key-id}
     access-key-secret: ${sky.alioss.access-key-secret}
+  # 微信小程序的配置属性
+  wechat:
+    appid: ${sky.wechat.appid}
+    secret: ${sky.wechat.secret}

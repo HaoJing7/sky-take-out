@@ -19,4 +19,7 @@ sky:
     port: 6379
     password: tanhao
     database: 0
-
+  # 微信小程序的配置属性
+  wechat:
+    appid: wx2477ed644fcb21f3
+    secret: c9ca577892046d7b2b0b032db6d2a3dd
