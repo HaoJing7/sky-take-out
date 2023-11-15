@@ -42,4 +42,14 @@ public class ShoppingCartController {
         return Result.success(shoppingCartService.showShoppingCart());
     }
 
+    /**
+     * 清空购物车
+     */
+    @DeleteMapping("/clean")
+    @ApiOperation("清空购物车")
+    public Result<?> clean() {
+        shoppingCartService.cleanShoppingCart();
+        return Result.success();
+    }
+
 }
