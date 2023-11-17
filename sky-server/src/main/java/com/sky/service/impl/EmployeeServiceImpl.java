@@ -67,9 +67,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      * 新增员工
-     *
-     * @Param
-     * @Return
      **/
     @Override
     public void save(EmployeeDTO employeeDTO) {

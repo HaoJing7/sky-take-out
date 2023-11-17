@@ -169,9 +169,12 @@ public class WeChatPayUtil {
         //解析返回结果
         JSONObject jsonObject = JSON.parseObject(bodyAsString);
         System.out.println(jsonObject);
-
+        // 返回预支付交易标识
         String prepayId = jsonObject.getString("prepay_id");
+
+        // 如果支付成功
         if (prepayId != null) {
+            // 对prepay_id进行加密并且签名
             String timeStamp = String.valueOf(System.currentTimeMillis() / 1000);
             String nonceStr = RandomStringUtils.randomNumeric(32);
             ArrayList<Object> list = new ArrayList<>();
