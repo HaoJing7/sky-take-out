@@ -46,7 +46,7 @@ public class OrderTask {
     /**
      * 处理正在派送的订单
      */
-    @Scheduled(cron = "0 0 * * * ? *")
+    @Scheduled(cron = "0 0 1 * * ?")
     public void processDeliveryOrder() {
         log.info("定时处理派送中的订单，改成已完成状态");
         // select * from orders where status = 4 and order_time < 当前时间-1小时
