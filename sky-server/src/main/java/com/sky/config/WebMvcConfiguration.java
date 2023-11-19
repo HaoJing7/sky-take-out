@@ -104,7 +104,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
     /**
      * 扩展Spring MVC框架的消息转换器
      * 对后端返回给前端的数据做一个统一的处理
-     *
+     * （用于处理日期类型的转换  实体类对应数据库日期类型）
      * @Param
      * @Return
      **/
